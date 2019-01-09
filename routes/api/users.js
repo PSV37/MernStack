@@ -54,7 +54,7 @@ router.post("/register", (req, res) => {
               .save()
               .then(user => res.json(user))
               .catch(err => console.log("error occurd"));
-          }
+          } //End if
         });
       });
     } //End if-else
