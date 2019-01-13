@@ -1,11 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../../models/User");
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const config = require("../../config/keys");
 const passport = require("passport");
+// Load User Model
+const User = require("../../models/User");
+
+// Get Config Screte Key
+const config = require("../../config/keys");
+
+// Load Validations Files
 const validateRegisterInput = require("../../validators/register");
 const validatoeLoginInput = require("../../validators/login");
 
@@ -20,13 +25,13 @@ router.get("/test", (req, res) => res.json({ msg: "User work" }));
 /* @access Public
 */
 router.post("/register", (req, res) => {
-  const { errors, isValid } = validateRegisterInput(req.body);
+  /* const { errors, isValid } = validateRegisterInput(req.body);
 
   //Check Validations
   if (!isValid) {
     console.log("errors findout");
     return res.status(400).json(errors);
-  }
+  } */
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
       return res.status(400).json({ email: "Email Already Exists" });
@@ -110,7 +115,7 @@ router.post("/login", (req, res) => {
   });
 });
 
-/* @route  POST api/users/current
+/* @route  GET api/users/current
 /* @desc   Get Autharization User
 /* @access Private
 */

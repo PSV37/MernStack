@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
-const mongoose1 = require("mongoose");
 const Schema = mongoose.Schema();
-//console.log(mongoose.Schema.Types.ObjectId);
 
 const ProfileSchema = mongoose.Schema({
   user: {
@@ -50,8 +48,7 @@ const ProfileSchema = mongoose.Schema({
         type: String
       },
       from: {
-        type: Date,
-        required: true
+        type: Date
       },
       to: {
         type: Date
@@ -80,8 +77,7 @@ const ProfileSchema = mongoose.Schema({
         type: String
       },
       from: {
-        type: Date,
-        required: true
+        type: Date
       },
       to: {
         type: Date
@@ -96,23 +92,25 @@ const ProfileSchema = mongoose.Schema({
     }
   ],
 
-  social: {
-    youtub: {
-      tyep: String
-    },
-    facebook: {
-      tyep: String
-    },
-    linkedin: {
-      tyep: String
-    },
-    instagram: {
-      tyep: String
-    },
-    twitter: {
-      tyep: String
+  social: [
+    {
+      youtub: {
+        tyep: String
+      },
+      facebook: {
+        tyep: String
+      },
+      linkedin: {
+        tyep: String
+      },
+      instagram: {
+        tyep: String
+      },
+      twitter: {
+        tyep: String
+      }
     }
-  },
+  ],
 
   date: {
     type: Date,
