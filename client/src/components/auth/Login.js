@@ -69,7 +69,7 @@ class Login extends Component {
                     placeholder="Email Address"
                     type="email"
                     onChange={this.onChange}
-                    error={errors}
+                    error={this.errors}
                   />
 
                   <TextInputField

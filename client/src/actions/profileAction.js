@@ -65,5 +65,67 @@ export const deleteCurrentUserAccount = () => dispatch => {
   }
 };
 
+//Add Experience Details
+export const addExperience = (expData, history) => dispatch => {
+  axios
+    .post("api/profile/experience", expData)
+    .then(res => history.push("/dashboard"))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+//Add Education Details
+export const addEducation = (eduData, history) => dispatch => {
+  axios
+    .post("api/profile/education", eduData)
+    .then(res => history.push("dashboard"))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+//Delete Education By Id
+export const deleteEducation = (eduId, history) => dispatch => {
+  axios
+    .delete("api/profile/education/" + eduId)
+    .then(res =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Delete Experince By Id
+export const deleteExperience = (eduId, history) => dispatch => {
+  axios
+    .delete("api/profile/experience/" + eduId)
+    .then(res =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response
+      })
+    );
+};
+
 //Edit CUrrent User Profile
 export const editProfile = () => {};
