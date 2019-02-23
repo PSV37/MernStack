@@ -21,8 +21,10 @@ import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
 import AddExperience from "./components/add-credentials/AddExperience";
 import AddEducation from "./components/add-credentials/AddEducation";
+import GetProfiles from "./components/profiles/GetProfiles";
 import store from "./store";
 import { clearProfileLoading } from "./actions/profileAction";
+import Profile from "./components/profile/Profile";
 
 if (localStorage.jwtToken) {
   //Set user auth token
@@ -54,7 +56,9 @@ class App extends Component {
             <div className="container">
               <Route exact path="/login" component={Login} />
               <Route exact path="/sign-up" component={Register} />
-              <Route exact path="/profiles" component={Profiles} />
+              {/* <Route exact path="/profiles" component={Profiles} /> */}
+              <Route exact path="/profile/:handle" component={Profile} />
+              <Route exact path="/profiles" component={GetProfiles} />
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
               </Switch>

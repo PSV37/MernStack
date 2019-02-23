@@ -12,28 +12,41 @@ class Education extends Component {
   };
 
   render() {
-    const education = this.props.education.map(exp => (
-      <tr key={exp._id}>
-        <td>{exp.school}</td>
-        <td>{exp.degree}</td>
-        <td>
-          <Moment format="YYYY/MM/DD">{exp.from}</Moment> -
-          {exp.to === null ? (
-            "Now"
-          ) : (
-            <Moment format="YYYY/MM/DD">{exp.to}</Moment>
-          )}
-        </td>
-        <td>
-          <button
-            onClick={this.onClickDelete.bind(this, exp._id)}
-            className="btn btn-danger"
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
-    ));
+    let education;
+    if (this.props.education.length > 0) {
+      education = this.props.education.map(exp => (
+        <tr key={exp._id}>
+          <td>{exp.school}</td>
+          <td>{exp.degree}</td>
+          <td>
+            <Moment format="YYYY/MM/DD">{exp.from}</Moment> -
+            {exp.to === null ? (
+              "Now"
+            ) : (
+              <Moment format="YYYY/MM/DD">{exp.to}</Moment>
+            )}
+          </td>
+          <td>
+            <button
+              onClick={this.onClickDelete.bind(this, exp._id)}
+              className="btn btn-danger"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      ));
+    } else {
+      education = (
+        <h6
+          className="text-center d-none d-md-block"
+          style={{ color: "green" }}
+        >
+          Not Created Education Yet
+        </h6>
+      );
+    }
+
     return (
       <div>
         <h4 className="mb4">Education Credentials</h4>

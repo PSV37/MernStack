@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SET_USER_TOKEN } from "./types";
+import { SET_USER_TOKEN, GET_PROFILES } from "./types";
 
 import {
   GET_PROFILE,
@@ -22,6 +22,24 @@ export const getCurrentProfile = () => dispatch => {
       dispatch({
         type: GET_PROFILE,
         payload: {}
+      })
+    );
+};
+
+export const getProfileByHandle = handle => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get("/api/profile/handle/" + handle)
+    .then(res =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: null
       })
     );
 };
@@ -116,6 +134,24 @@ export const deleteExperience = (eduId, history) => dispatch => {
     .then(res =>
       dispatch({
         type: GET_PROFILE,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response
+      })
+    );
+};
+
+//Get ALl Profiles Details
+export const getAllProfiles = () => dispatch => {
+  axios
+    .get("api/profile/all")
+    .then(res =>
+      dispatch({
+        type: GET_PROFILES,
         payload: res.data
       })
     )

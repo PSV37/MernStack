@@ -78,7 +78,7 @@ class Login extends Component {
                     placeholder="Enter Password"
                     type="password"
                     onChange={this.onChange}
-                    error={errors}
+                    error={this.errors}
                   />
                 </div>
                 <input type="submit" className="btn btn-info btn-block mt-4" />
