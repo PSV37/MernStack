@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const TextAreaFieldGroup = ({ name, value, placeholder, onChange, error }) => {
+  console.log({ name });
   return (
     <div>
       {" "}
@@ -10,8 +11,8 @@ const TextAreaFieldGroup = ({ name, value, placeholder, onChange, error }) => {
           className="form-control form-control-lg"
           placeholder={placeholder}
           name={name}
-          value={value}
           onChange={onChange}
+          value={value}
         />
         {/*    <span style={{ color: "red" }}>{error.email ? error.email : null}</span> */}
       </div>

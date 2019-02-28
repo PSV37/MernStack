@@ -78,6 +78,12 @@ class Navbar extends Component {
                     Developers
                   </NavLink>
                 </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/feed">
+                    {" "}
+                    Post Feeds
+                  </NavLink>
+                </li>
               </ul>
               {isAuth ? authLinks : guestLink}
             </div>

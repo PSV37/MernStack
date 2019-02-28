@@ -70,12 +70,8 @@ router.delete(
     Profile.findOne({ user: req.user.id }).then(profile => {
       Post.findById(req.params.id)
         .then(post => {
-          if (post.user.toString() != req.user.id) {
-            return res.status(401).json({ nuauthorize: "Unable to delete" });
-          } //End if
-
           //Remove From Post
-          post.remove().then(() => res.json({ success: true }));
+          post.remove().then(() => res.json({ post }));
         })
         .catch(err => res.status(404).json({ nopostfound: "NO Post Found" }));
     });
@@ -92,6 +88,7 @@ router.post(
     Profile.findOne({ user: req.user.id }).then(profile => {
       Post.findById(req.params.id)
         .then(post => {
+          console.log(user);
           if (
             post.likes.filter(like => like.user.toString() === req.user.id)
               .length > 0
@@ -101,7 +98,7 @@ router.post(
               .json({ alreadyLiked: "User Already liked this post" });
           } //End if
 
-          post.likes.unshift({ user: req.user.id });
+          //post.likes.unshift({ user: req.user.id });
           post.save().then(postLike => res.json(postLike));
         })
         .catch(err => res.status(404).json({ nopostfound: "NO Post Found" }));

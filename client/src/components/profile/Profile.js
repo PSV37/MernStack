@@ -15,6 +15,13 @@ class Profile extends Component {
       this.props.getProfileByHandle(this.props.match.params.handle);
     }
   }
+
+  componentWillReceiveProps(nextProps) {
+    console.log({ nextProps });
+    if (nextProps.profile.profile === null && this.props.profile.isLoading) {
+      this.props.history.push("/not-found");
+    }
+  }
   render() {
     const { profile, isLoading } = this.props.profile;
     let profileContent;
@@ -35,8 +42,9 @@ class Profile extends Component {
           <ProfileAbout profile={profile} />
           <ProfileCreds
             education={profile.education}
-            experience={profile.experience}/>
-          <ProfileGithub />
+            experience={profile.experience}
+          />
+          <ProfileGithub username={profile.user.name} />
         </div>
       );
     }

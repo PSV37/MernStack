@@ -25,6 +25,9 @@ import GetProfiles from "./components/profiles/GetProfiles";
 import store from "./store";
 import { clearProfileLoading } from "./actions/profileAction";
 import Profile from "./components/profile/Profile";
+import Notfound from "./components/error/Notfound";
+import Posts from "./components/posts/Posts";
+import Post from "./components/post/Post";
 
 if (localStorage.jwtToken) {
   //Set user auth token
@@ -89,6 +92,19 @@ class App extends Component {
                   path="/add-education"
                   component={AddEducation}
                 />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/post/:id"
+                  component={Post}
+                />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/feed" component={Posts} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/not-found" component={Notfound} />
               </Switch>
             </div>
 
