@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 mongoose.Promise = require("bluebird");
 const passport = require("passport");
+const path = require("path");
 
 // Import Folder Files
 const config = require("./config/keys");
@@ -23,10 +24,7 @@ app.use(bodyParser.json());
 
 // Mongo DB Connection
 mongoose
-  .connect(
-    db,
-    { useMongoClient: true }
-  )
+  .connect(db, { useMongoClient: true })
   .then(() => console.log("mongo DB connected"))
   .catch(err => console.log("error occured with mongoo DB" + err));
 
@@ -39,6 +37,14 @@ app.use("/api/profile", profile);
 app.use(passport.initialize());
 
 require("./config/passport")(passport);
+
+if (process.env.NODE_ENV === "production") {
+  //Set Static folder
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 // Set Port For Running The Server
 const port = process.env.PORT || 5000;
