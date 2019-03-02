@@ -38,13 +38,13 @@ app.use(passport.initialize());
 
 require("./config/passport")(passport);
 
-if (process.env.NODE_ENV === "production") {
-  //Set Static folder
-  app.use(express.static("client/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client/build', "index.html"));
-  });
-}
+//if (process.env.NODE_ENV === "production") {
+//Set Static folder
+app.use(express.static("client/build"));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
+});
+//}
 
 // Set Port For Running The Server
 const port = process.env.PORT || 5000;
