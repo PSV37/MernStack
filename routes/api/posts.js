@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
 //Load Post Model
-const POst = require("../../models/Post");
+const Post = require("../../models/Post");
 //Load Profile Model
 const Profile = require("../../models/Profile");
 
@@ -88,7 +88,7 @@ router.post(
     Profile.findOne({ user: req.user.id }).then(profile => {
       Post.findById(req.params.id)
         .then(post => {
-          console.log(user);
+          console.log(post);
           if (
             post.likes.filter(like => like.user.toString() === req.user.id)
               .length > 0
@@ -98,7 +98,7 @@ router.post(
               .json({ alreadyLiked: "User Already liked this post" });
           } //End if
 
-          //post.likes.unshift({ user: req.user.id });
+          post.likes.unshift({ user: req.user.id });
           post.save().then(postLike => res.json(postLike));
         })
         .catch(err => res.status(404).json({ nopostfound: "NO Post Found" }));
@@ -174,6 +174,7 @@ router.delete(
   (req, res) => {
     Post.findById(req.params.id)
       .then(post => {
+        console.log({ post });
         if (
           post.comments.filter(
             comment => comment._id.toString() === req.params.comment_id
