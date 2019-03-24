@@ -81,7 +81,13 @@ class Navbar extends Component {
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/feed">
                     {" "}
-                    Post Feeds
+                    Post Feedsdddddd
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/test-symantic">
+                    {" "}
+                    Test
                   </NavLink>
                 </li>
               </ul>

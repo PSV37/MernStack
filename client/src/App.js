@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import "semantic-ui-css/semantic.min.css";
 import { BrowserRouter } from "react-router-dom";
+import "react-phone-number-input/style.css";
 import { Route, Switch } from "react-router";
 import { Provider } from "react-redux";
 import jwt_decode from "jwt-decode";
@@ -28,6 +30,7 @@ import Profile from "./components/profile/Profile";
 import Notfound from "./components/error/Notfound";
 import Posts from "./components/posts/Posts";
 import Post from "./components/post/Post";
+import TestSymantic from "./components/test/TestSymantic";
 
 if (localStorage.jwtToken) {
   //Set user auth token
@@ -94,17 +97,20 @@ class App extends Component {
                 />
               </Switch>
               <Switch>
-                <PrivateRoute
-                  exact
-                  path="/post/:id"
-                  component={Post}
-                />
+                <PrivateRoute exact path="/post/:id" component={Post} />
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/feed" component={Posts} />
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/not-found" component={Notfound} />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/test-symantic"
+                  component={TestSymantic}
+                />
               </Switch>
             </div>
 

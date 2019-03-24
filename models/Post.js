@@ -45,7 +45,7 @@ const userPost = mongoose.Schema({
       }
     }
   ],
-  data: {
+  date: {
     type: Date,
     default: Date.now
   }
